@@ -4,12 +4,12 @@ Testing demo using assert and doctest
 """
 
 import doctest
-from prac_06.car import Car
+from car import Car
 
 
 def repeat_string(s, n):
     """Repeat string s, n times, with spaces in between."""
-    return s * n
+    return " ".join([s] * n)
 
 
 def is_long_word(word, length=5):
@@ -22,7 +22,7 @@ def is_long_word(word, length=5):
     >>> is_long_word("Python", 6)
     True
     """
-    return len(word) > length
+    return len(word) >= length
 
 
 def run_tests():
@@ -46,13 +46,17 @@ def run_tests():
     # using the value passed in or the default
     # You should test both of these
     test_car = Car(fuel=10)
+    assert test_car.fuel == 10
+    test_car = Car()
+    assert test_car.fuel == 0
 
 
-run_tests()
+# run_tests()
 
 # TODO: 3. Uncomment the following line and run the doctests
 # (PyCharm may see your >>> doctest comments and run doctests anyway.)
 # doctest.testmod()
+
 
 # TODO: 4. Fix the failing is_long_word function
 # (don't change the tests, change the function!)
@@ -66,3 +70,22 @@ run_tests()
 # and one more you decide (one that is valid!)
 # test this and watch the tests fail
 # then write the body of the function so that the tests pass
+
+def phrase_to_sentence(phrase):
+    """
+    Format a phrase as a sentence. Starting with a capital and ending with a single full stop.
+    >>> phrase_to_sentence("hello")
+    'Hello.'
+    >>> phrase_to_sentence("It is an ex parrot")
+    'It is an ex parrot.'
+    >>> phrase_to_sentence("This subject rocks")
+    'This subject rocks.'
+    """
+    sentence = phrase.capitalize()
+    if sentence[-1] != ".":
+        sentence += "."
+    return sentence
+
+
+run_tests()
+doctest.testmod()
